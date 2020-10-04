@@ -2,6 +2,7 @@ subdirs="liveMedia groupsock UsageEnvironment BasicUsageEnvironment"
 lipo_subdirs="groupsock liveMedia UsageEnvironment BasicUsageEnvironment"
 ios_archs="mac-catalyst iphoneos iphone-simulator"
 tvos_archs="tvos tvos-simulator"
+android_archs="armeabi-v7a arm64-v8a x86_64"
 
 clean() {
     for subdir in $subdirs
@@ -15,7 +16,7 @@ clean() {
     find . -type f -name "*.o" -delete
 }
 
-build_ios() {
+build_ios_libs() {
     for arch in $ios_archs
     do
         ./genMakefiles $arch
@@ -24,7 +25,7 @@ build_ios() {
     done
 }
 
-build_tvos() {
+build_tvos_libs() {
     for arch in $tvos_archs
     do
         ./genMakefiles $arch
@@ -47,31 +48,45 @@ create_xcframework() {
     done
 }
 
-create_ios_libs() {
-    for subdir in $lipo_subdirs
+build_android() {
+    rm -rf build
+    rm -rf prebuilt
+    for arch in $android_archs
     do
-        mkdir -p $subdir/build/$subdir/lib
-        mkdir -p $subdir/build/$subdir/include
-        cp -a $subdir/include/. $subdir/build/$subdir/include/
-        lipo -create $subdir/build-iphoneos/lib/lib"$subdir".a $subdir/build-iphone-simulator/lib/lib"$subdir".a -output $subdir/build/$subdir/lib/lib"$subdir".a
+        build_dir=build/${arch}
+        mkdir -p ${build_dir}
+        cd ${build_dir}
+
+        cmake ../../ -DCMAKE_TOOLCHAIN_FILE="${ANDROID_NDK_ROOT}/build/cmake/android.toolchain.cmake" -DANDROID_ABI=${arch}
+        make install -j12
+
+        cd -
     done
 }
 
-create_tvos_libs() {
-    for subdir in $lipo_subdirs
-    do
-        mkdir -p $subdir/build/$subdir/lib
-        mkdir -p $subdir/build/$subdir/include
-        cp -a $subdir/include/. $subdir/build/$subdir/include/
-        lipo -create $subdir/build-tvos/lib/lib"$subdir".a $subdir/build-tvos-simulator/lib/lib"$subdir".a -output $subdir/build/$subdir/lib/lib"$subdir".a
-    done
-}
-
-build() {
-    build_ios
-    build_tvos
+build_ios() {
+    build_ios_libs
+    build_tvos_libs
     create_xcframework
 }
 
-clean
-build
+
+while [[ $# -gt 0 ]]
+do
+key="$1"
+
+echo ${key}
+
+case $key in
+    --android)
+    build_android
+    shift # past argument
+    shift # past value
+    ;;
+    --ios)
+    build_ios
+    shift # past argument
+    shift # past value
+    ;;
+esac
+done
