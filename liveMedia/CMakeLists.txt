@@ -1,0 +1,200 @@
+cmake_minimum_required(VERSION 3.10)
+
+project(liveMedia)
+
+add_library(${PROJECT_NAME} SHARED
+    T140TextRTPSink.cpp
+    AMRAudioRTPSink.cpp
+    QuickTimeGenericRTPSource.cpp
+    Media.cpp
+    VP9VideoRTPSink.cpp
+    MP3ADURTPSource.cpp
+    H263plusVideoStreamParser.cpp
+    PassiveServerMediaSubsession.cpp
+    H263plusVideoRTPSource.cpp
+    RawVideoRTPSink.cpp
+    H265VideoRTPSink.cpp
+    MPEG2TransportFileServerMediaSubsession.cpp
+    MPEG2TransportStreamMultiplexor.cpp
+    TheoraVideoRTPSink.cpp
+    RTSPCommon.cpp
+    BitVector.cpp
+    OggFile.cpp
+    AVIFileSink.cpp
+    AMRAudioFileSink.cpp
+    H264VideoStreamFramer.cpp
+    MPEG1or2VideoStreamFramer.cpp
+    ByteStreamMemoryBufferSource.cpp
+    MPEG2TransportStreamAccumulator.cpp
+    DVVideoStreamFramer.cpp
+    ByteStreamFileSource.cpp
+    OggFileSink.cpp
+    MPEG2TransportStreamFramer.cpp
+    AC3AudioFileServerMediaSubsession.cpp
+    H264VideoFileServerMediaSubsession.cpp
+    MP3ADUTranscoder.cpp
+    OggFileServerDemux.cpp
+    H264VideoFileSink.cpp
+    MPEGVideoStreamParser.cpp
+    ADTSAudioFileServerMediaSubsession.cpp
+    JPEGVideoSource.cpp
+    JPEGVideoRTPSource.cpp
+    RTPInterface.cpp
+    MatroskaFileServerDemux.cpp
+    VideoRTPSink.cpp
+    MP3Internals.cpp
+    MediaSource.cpp
+    JPEG2000VideoRTPSource.cpp
+    RTSPClient.cpp
+    FileServerMediaSubsession.cpp
+    AC3AudioRTPSink.cpp
+    uLawAudioFilter.cpp
+    Locale.cpp
+    Base64.cpp
+    DVVideoRTPSink.cpp
+    AudioInputDevice.cpp
+    MPEG4VideoStreamFramer.cpp
+    H264or5VideoRTPSink.cpp
+    H265VideoStreamFramer.cpp
+    MPEG2TransportStreamFromESSource.cpp
+    MPEG4LATMAudioRTPSource.cpp
+    RTCP.cpp
+    AMRAudioSource.cpp
+    H264VideoRTPSource.cpp
+    RawVideoRTPSource.cpp
+    TheoraVideoRTPSource.cpp
+    MPEG2TransportStreamIndexFile.cpp
+    MPEG1or2VideoRTPSource.cpp
+    MatroskaFile.cpp
+    MPEG2TransportStreamTrickModeFilter.cpp
+    MediaSession.cpp
+    TCPStreamSink.cpp
+    rtcp_from_spec.c
+    RTSPServerRegister.cpp
+    MPEG1or2FileServerDemux.cpp
+    H261VideoRTPSource.cpp
+    MPEG4GenericRTPSource.cpp
+    OggFileParser.cpp
+    InputFile.cpp
+    MPEG1or2VideoRTPSink.cpp
+    FramedFileSource.cpp
+    VP8VideoRTPSink.cpp
+    H265VideoFileServerMediaSubsession.cpp
+    MP3FileSource.cpp
+    H265VideoRTPSource.cpp
+    MatroskaFileServerMediaSubsession.cpp
+    MPEG1or2Demux.cpp
+    H265VideoFileSink.cpp
+    MP3StreamState.cpp
+    MediaSink.cpp
+    MPEG4ESVideoRTPSource.cpp
+    MPEG4LATMAudioRTPSink.cpp
+    H265VideoStreamDiscreteFramer.cpp
+    H264VideoRTPSink.cpp
+    DVVideoFileServerMediaSubsession.cpp
+    RTPSink.cpp
+    ServerMediaSession.cpp
+    H264or5VideoStreamFramer.cpp
+    MP3AudioMatroskaFileServerMediaSubsession.cpp
+    MPEG1or2VideoFileServerMediaSubsession.cpp
+    MPEG1or2AudioRTPSource.cpp
+    VorbisAudioRTPSource.cpp
+    H263plusVideoRTPSink.cpp
+    MPEG4VideoFileServerMediaSubsession.cpp
+    RTSPServerSupportingHTTPStreaming.cpp
+    VorbisAudioRTPSink.cpp
+    H264VideoStreamDiscreteFramer.cpp
+    MP3InternalsHuffmanTable.cpp
+    RTPSource.cpp
+    StreamReplicator.cpp
+    MP3Transcoder.cpp
+    TextRTPSink.cpp
+    JPEGVideoRTPSink.cpp
+    AMRAudioRTPSource.cpp
+    MPEG1or2AudioRTPSink.cpp
+    BasicUDPSource.cpp
+    OggFileServerMediaSubsession.cpp
+    ourMD5.cpp
+    AMRAudioFileSource.cpp
+    H263plusVideoStreamFramer.cpp
+    StreamParser.cpp
+    SimpleRTPSink.cpp
+    MP3ADUinterleaving.cpp
+    DeviceSource.cpp
+    WAVAudioFileServerMediaSubsession.cpp
+    QuickTimeFileSink.cpp
+    MPEG1or2AudioStreamFramer.cpp
+    SimpleRTPSource.cpp
+    ByteStreamMultiFileSource.cpp
+    FramedSource.cpp
+    MP3ADURTPSink.cpp
+    MPEGVideoStreamFramer.cpp
+    MatroskaDemuxedTrack.cpp
+    MPEG1or2VideoStreamDiscreteFramer.cpp
+    OnDemandServerMediaSubsession.cpp
+    GenericMediaServer.cpp
+    DVVideoRTPSource.cpp
+    VP9VideoRTPSource.cpp
+    MultiFramedRTPSink.cpp
+    MP3InternalsHuffman.cpp
+    WAVAudioFileSource.cpp
+    EBMLNumber.cpp
+    MultiFramedRTPSource.cpp
+    MPEG2TransportUDPServerMediaSubsession.cpp
+    ProxyServerMediaSession.cpp
+    MPEG2IndexFromTransportStream.cpp
+    GSMAudioRTPSink.cpp
+    FramedFilter.cpp
+    AC3AudioStreamFramer.cpp
+    H264or5VideoFileSink.cpp
+    H263plusVideoFileServerMediaSubsession.cpp
+    MPEG4VideoStreamDiscreteFramer.cpp
+    QCELPAudioRTPSource.cpp
+    RTSPServer.cpp
+    ADTSAudioFileSource.cpp
+    MP3ADUdescriptor.cpp
+    VP8VideoRTPSource.cpp
+    OggDemuxedTrack.cpp
+    AudioRTPSink.cpp
+    RTSPRegisterSender.cpp
+    SIPClient.cpp
+    JPEG2000VideoRTPSink.cpp
+    FileSink.cpp
+    MPEG2TransportStreamFromPESSource.cpp
+    MPEG1or2DemuxedServerMediaSubsession.cpp
+    MatroskaFileParser.cpp
+    MP3AudioFileServerMediaSubsession.cpp
+    MPEG4ESVideoRTPSink.cpp
+    MPEG4GenericRTPSink.cpp
+    AC3AudioRTPSource.cpp
+    BasicUDPSink.cpp
+    MPEG1or2DemuxedElementaryStream.cpp
+    H264or5VideoStreamDiscreteFramer.cpp
+    OutputFile.cpp
+    MP3ADU.cpp
+    DigestAuthentication.cpp
+    AMRAudioFileServerMediaSubsession.cpp
+)
+
+file(GLOB_RECURSE INCLUDE_FILES "include/*.h*")
+
+set(PUBLIC_INCLUDE_DIRECTORIES include/)
+
+target_include_directories(${PROJECT_NAME} PUBLIC
+    ${PUBLIC_INCLUDE_DIRECTORIES}
+)
+
+target_include_directories(${PROJECT_NAME} PRIVATE
+    ../groupsock/include/
+    ../UsageEnvironment/include/
+)
+
+set_target_properties(${PROJECT_NAME} 
+    PROPERTIES PUBLIC_HEADER "${INCLUDE_FILES}"
+)
+
+install(TARGETS ${PROJECT_NAME}
+    LIBRARY DESTINATION "${OUTPUT_LIB_DIR}/${PROJECT_NAME}"
+    ARCHIVE DESTINATION "${OUTPUT_LIB_DIR}/${PROJECT_NAME}"
+    PUBLIC_HEADER DESTINATION "${OUTPUT_INCLUDE_DIR}/${PROJECT_NAME}/include"
+)
