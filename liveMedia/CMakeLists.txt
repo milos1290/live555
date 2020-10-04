@@ -2,13 +2,14 @@ cmake_minimum_required(VERSION 3.10)
 
 project(liveMedia)
 
-add_library(${PROJECT_NAME} SHARED
+add_library(${PROJECT_NAME} OBJECT
     T140TextRTPSink.cpp
     AMRAudioRTPSink.cpp
     QuickTimeGenericRTPSource.cpp
     Media.cpp
     VP9VideoRTPSink.cpp
     MP3ADURTPSource.cpp
+    ADTSAudioStreamDiscreteFramer.cpp
     H263plusVideoStreamParser.cpp
     PassiveServerMediaSubsession.cpp
     H263plusVideoRTPSource.cpp
@@ -44,6 +45,7 @@ add_library(${PROJECT_NAME} SHARED
     VideoRTPSink.cpp
     MP3Internals.cpp
     MediaSource.cpp
+    MPEG2TransportStreamDemuxedTrack.cpp
     JPEG2000VideoRTPSource.cpp
     RTSPClient.cpp
     FileServerMediaSubsession.cpp
@@ -60,15 +62,16 @@ add_library(${PROJECT_NAME} SHARED
     MPEG4LATMAudioRTPSource.cpp
     RTCP.cpp
     AMRAudioSource.cpp
+    MIKEY.cpp
     H264VideoRTPSource.cpp
     RawVideoRTPSource.cpp
+    HMAC_SHA1.cpp
     TheoraVideoRTPSource.cpp
     MPEG2TransportStreamIndexFile.cpp
     MPEG1or2VideoRTPSource.cpp
     MatroskaFile.cpp
     MPEG2TransportStreamTrickModeFilter.cpp
     MediaSession.cpp
-    TCPStreamSink.cpp
     rtcp_from_spec.c
     RTSPServerRegister.cpp
     MPEG1or2FileServerDemux.cpp
@@ -101,7 +104,6 @@ add_library(${PROJECT_NAME} SHARED
     VorbisAudioRTPSource.cpp
     H263plusVideoRTPSink.cpp
     MPEG4VideoFileServerMediaSubsession.cpp
-    RTSPServerSupportingHTTPStreaming.cpp
     VorbisAudioRTPSink.cpp
     H264VideoStreamDiscreteFramer.cpp
     MP3InternalsHuffmanTable.cpp
@@ -121,17 +123,20 @@ add_library(${PROJECT_NAME} SHARED
     SimpleRTPSink.cpp
     MP3ADUinterleaving.cpp
     DeviceSource.cpp
+    HLSSegmenter.cpp
     WAVAudioFileServerMediaSubsession.cpp
     QuickTimeFileSink.cpp
     MPEG1or2AudioStreamFramer.cpp
     SimpleRTPSource.cpp
     ByteStreamMultiFileSource.cpp
     FramedSource.cpp
+    MPEG2TransportStreamParser.cpp
     MP3ADURTPSink.cpp
     MPEGVideoStreamFramer.cpp
     MatroskaDemuxedTrack.cpp
     MPEG1or2VideoStreamDiscreteFramer.cpp
     OnDemandServerMediaSubsession.cpp
+    SRTPCryptographicContext.cpp
     GenericMediaServer.cpp
     DVVideoRTPSource.cpp
     VP9VideoRTPSource.cpp
@@ -149,6 +154,7 @@ add_library(${PROJECT_NAME} SHARED
     H264or5VideoFileSink.cpp
     H263plusVideoFileServerMediaSubsession.cpp
     MPEG4VideoStreamDiscreteFramer.cpp
+    TLSState.cpp
     QCELPAudioRTPSource.cpp
     RTSPServer.cpp
     ADTSAudioFileSource.cpp
@@ -164,16 +170,20 @@ add_library(${PROJECT_NAME} SHARED
     MPEG1or2DemuxedServerMediaSubsession.cpp
     MatroskaFileParser.cpp
     MP3AudioFileServerMediaSubsession.cpp
+    MPEG2TransportStreamParser_PAT.cpp
     MPEG4ESVideoRTPSink.cpp
+    MPEG2TransportStreamDemux.cpp
     MPEG4GenericRTPSink.cpp
     AC3AudioRTPSource.cpp
     BasicUDPSink.cpp
     MPEG1or2DemuxedElementaryStream.cpp
     H264or5VideoStreamDiscreteFramer.cpp
+    MPEG2TransportStreamParser_STREAM.cpp
     OutputFile.cpp
     MP3ADU.cpp
     DigestAuthentication.cpp
     AMRAudioFileServerMediaSubsession.cpp
+    MPEG2TransportStreamParser_PMT.cpp
 )
 
 file(GLOB_RECURSE INCLUDE_FILES "include/*.h*")
@@ -187,14 +197,21 @@ target_include_directories(${PROJECT_NAME} PUBLIC
 target_include_directories(${PROJECT_NAME} PRIVATE
     ../groupsock/include/
     ../UsageEnvironment/include/
+    ../BasicUsageEnvironment/include/
+)
+
+target_link_libraries(${PROJECT_NAME}
+    UsageEnvironment
+    BasicUsageEnvironment
+    groupsock
 )
 
 set_target_properties(${PROJECT_NAME} 
     PROPERTIES PUBLIC_HEADER "${INCLUDE_FILES}"
 )
 
-install(TARGETS ${PROJECT_NAME}
-    LIBRARY DESTINATION "${OUTPUT_LIB_DIR}/${PROJECT_NAME}"
-    ARCHIVE DESTINATION "${OUTPUT_LIB_DIR}/${PROJECT_NAME}"
-    PUBLIC_HEADER DESTINATION "${OUTPUT_INCLUDE_DIR}/${PROJECT_NAME}/include"
-)
+# install(TARGETS ${PROJECT_NAME}
+#     LIBRARY DESTINATION "${OUTPUT_LIB_DIR}/${PROJECT_NAME}"
+#     ARCHIVE DESTINATION "${OUTPUT_LIB_DIR}/${PROJECT_NAME}"
+#     PUBLIC_HEADER DESTINATION "${OUTPUT_INCLUDE_DIR}/${PROJECT_NAME}/include"
+# )
