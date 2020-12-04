@@ -22,9 +22,9 @@ if ( CMAKE_COMPILER_IS_GNUCXX )
    set ( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive" )
 endif ()
 
-if ( NOT DEFINED BUILD_SHARED_LIBS )
-   set ( BUILD_SHARED_LIBS TRUE )
-endif ()
+# if ( NOT DEFINED BUILD_SHARED_LIBS )
+#    set ( BUILD_SHARED_LIBS TRUE )
+# endif ()
 
 set ( ${TEST_PROGS}_HOME ${CMAKE_CURRENT_SOURCE_DIR}/testProgs )
 
@@ -245,6 +245,9 @@ list ( APPEND ${PROJECT_NAME}_HEADERS_LIVEMEDIA
    ${${PROJECT_NAME}_HOME}/liveMedia/include/WAVAudioFileSource.hh
    ${${PROJECT_NAME}_HOME}/liveMedia/include/RawVideoRTPSink.hh
    ${${PROJECT_NAME}_HOME}/liveMedia/include/RawVideoRTPSource.hh
+   ${${PROJECT_NAME}_HOME}/liveMedia/include/RawVideoFrameParameters.hh
+   ${${PROJECT_NAME}_HOME}/liveMedia/include/RTSPServerSupportingHTTPStreaming.hh
+   ${${PROJECT_NAME}_HOME}/liveMedia/include/TCPStreamSink.hh
 )
 # Group (Filter) source files
 source_group ( "Header Files\\liveMedia" FILES ${${PROJECT_NAME}_HEADERS_LIVEMEDIA} )
