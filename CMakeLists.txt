@@ -246,9 +246,9 @@ list ( APPEND ${PROJECT_NAME}_HEADERS_LIVEMEDIA
    ${${PROJECT_NAME}_HOME}/liveMedia/include/RawVideoRTPSink.hh
    ${${PROJECT_NAME}_HOME}/liveMedia/include/RawVideoRTPSource.hh
    ${${PROJECT_NAME}_HOME}/liveMedia/include/RawVideoFrameParameters.hh
-   ${${PROJECT_NAME}_HOME}/liveMedia/include/RTSPServerSupportingHTTPStreaming.hh
-   ${${PROJECT_NAME}_HOME}/liveMedia/include/TCPStreamSink.hh
 )
+# ${${PROJECT_NAME}_HOME}/liveMedia/include/RTSPServerSupportingHTTPStreaming.hh
+# ${${PROJECT_NAME}_HOME}/liveMedia/include/TCPStreamSink.hh
 # Group (Filter) source files
 source_group ( "Header Files\\liveMedia" FILES ${${PROJECT_NAME}_HEADERS_LIVEMEDIA} )
 

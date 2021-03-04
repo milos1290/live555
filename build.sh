@@ -2,7 +2,8 @@ subdirs="liveMedia groupsock UsageEnvironment BasicUsageEnvironment"
 lipo_subdirs="groupsock liveMedia UsageEnvironment BasicUsageEnvironment"
 ios_archs="mac-catalyst iphoneos iphone-simulator"
 tvos_archs="tvos tvos-simulator"
-android_archs="armeabi-v7a arm64-v8a x86_64"
+android_archs="armeabi-v7a arm64-v8a x86_64 x86"
+android_api_level=21
 
 clean() {
     for subdir in $subdirs
@@ -57,7 +58,11 @@ build_android() {
         mkdir -p ${build_dir}
         cd ${build_dir}
 
-        cmake ../../ -DCMAKE_TOOLCHAIN_FILE="${ANDROID_NDK_ROOT}/build/cmake/android.toolchain.cmake" -DANDROID_ABI=${arch}
+        cmake ../../ \
+                -DCMAKE_TOOLCHAIN_FILE="${ANDROID_NDK_ROOT}/build/cmake/android.toolchain.cmake" \
+                -DANDROID_ABI=${arch} \
+                -DANDROID_PLATFORM=${android_api_level} \
+                -DCMAKE_BUILD_TYPE=RELEASE
         make install -j12
 
         cd -
